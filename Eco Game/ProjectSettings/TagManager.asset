@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Trash
+  - foreGround
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - foreGround
   - 
   - 
   - 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Animated Island Tile_0: 4805441990402622794
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
