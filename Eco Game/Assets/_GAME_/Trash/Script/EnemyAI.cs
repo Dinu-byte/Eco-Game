@@ -1,125 +1,97 @@
 using UnityEngine;
 
+public enum EnemyState { Idle, Alerted, Attacking }
+
 public class EnemyAI : MonoBehaviour
 {
-    [Header("Vision Settings")]
-    public float fovAngle = 45f; // Angolo del campo visivo
-    public float fovDistance = 5f; // Distanza massima del campo visivo
-    public Vector2 eyePositionOffset = Vector2.zero; // Offset per la posizione degli "occhi"
-    public LayerMask obstructionMask; // Layer degli ostacoli
+    public EnemyState currentState = EnemyState.Idle;
+    public float moveSpeed = 3f;
+    public float attackRange = 1f;
 
-    [Header("Proximity Settings")]
-    public float proximityDistance = 2f; // Distanza per l'allarme immediato
-
-    [Header("Chase Settings")]
-    public float chaseExitDistance = 10f; // Distanza per perdere il giocatore
-    public float chaseSpeed = 3f; // Velocità di inseguimento
-
-    private bool isAlerted = false;
+    private FieldOfView fov;
     private Transform player;
     private Rigidbody2D rb;
-    private Vector2 facingDirection = Vector2.down;
+    private bool playerInAttackRange;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        fov = GetComponentInChildren<FieldOfView>();
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
-        UpdateFacingDirection();
+        switch (currentState)
+        {
+            case EnemyState.Idle:
+                UpdateIdleState();
+                break;
 
-        if (!isAlerted)
-        {
-            CheckForPlayer();
-        }
-        else
-        {
-            ChasePlayer();
-        }
-    }
+            case EnemyState.Alerted:
+                UpdateAlertedState();
+                break;
 
-    void UpdateFacingDirection()
-    {
-        // Aggiorna la direzione in base al movimento
-        if (rb.linearVelocity != Vector2.zero)
-        {
-            facingDirection = rb.linearVelocity.normalized;
+            case EnemyState.Attacking:
+                UpdateAttackingState();
+                break;
         }
     }
 
-    void CheckForPlayer()
+    void UpdateIdleState()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        // Controllo prossimità
-        if (distanceToPlayer <= proximityDistance)
+        if (fov.PlayerVisible)
         {
-            isAlerted = true;
-            Debug.Log("Player detected by proximity!");
-            return;
-        }
-
-        // Controllo campo visivo
-        Vector2 directionToPlayer = (player.position - transform.position).normalized;
-        float angleToPlayer = Vector2.Angle(facingDirection, directionToPlayer);
-
-        Debug.Log($"Angle: {angleToPlayer} - Distance: {distanceToPlayer}");
-
-        if (angleToPlayer <= fovAngle / 2 && distanceToPlayer <= fovDistance)
-        {
-            Vector2 eyePosition = (Vector2)transform.position + eyePositionOffset;
-            RaycastHit2D hit = Physics2D.Raycast(
-                eyePosition,
-                directionToPlayer,
-                fovDistance,
-                obstructionMask
-            );
-
-            Debug.DrawRay(eyePosition, directionToPlayer * fovDistance, Color.red, 0.1f);
-
-            if (hit.collider != null  && hit.collider.CompareTag("Player"))
-            {
-                isAlerted = true;
-                Debug.Log("Player detected by vision!");
-            }
+            currentState = EnemyState.Alerted;
         }
     }
 
-    void ChasePlayer()
+    void UpdateAlertedState()
     {
-        Vector2 direction = (player.position - transform.position).normalized;
-        rb.linearVelocity = direction * chaseSpeed;
+        // Movimento verso il giocatore
+        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
+        rb.linearVelocity = direction * moveSpeed;
 
-        // Controllo distanza di fuga
-        float currentDistance = Vector2.Distance(transform.position, player.position);
-        if (currentDistance > chaseExitDistance)
+        // Rotazione verso il giocatore
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        rb.MoveRotation(angle);
+
+        // Transizioni
+        if (!fov.PlayerVisible)
         {
-            isAlerted = false;
+            currentState = EnemyState.Idle;
             rb.linearVelocity = Vector2.zero;
-            Debug.Log("Player lost!");
+        }
+        else if (playerInAttackRange)
+        {
+            currentState = EnemyState.Attacking;
+            rb.linearVelocity = Vector2.zero;
         }
     }
 
-    private void OnDrawGizmosSelected()
+    void UpdateAttackingState()
     {
-        // Disegna il campo visivo
-        Vector2 eyePosition = (Vector2)transform.position + eyePositionOffset;
+        // Logica di attacco qui
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(eyePosition, proximityDistance);
+        if (!playerInAttackRange)
+        {
+            currentState = EnemyState.Alerted;
+        }
+    }
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(eyePosition, fovDistance);
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInAttackRange = true;
+        }
+    }
 
-        // Disegna il cono visivo
-        Vector2 forwardLine = Quaternion.Euler(0, 0, fovAngle / 2) * facingDirection * fovDistance;
-        Vector2 backwardLine = Quaternion.Euler(0, 0, -fovAngle / 2) * facingDirection * fovDistance;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(eyePosition, forwardLine);
-        Gizmos.DrawRay(eyePosition, backwardLine);
-        Gizmos.DrawLine(eyePosition + forwardLine, eyePosition + backwardLine);
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInAttackRange = false;
+        }
     }
 }
