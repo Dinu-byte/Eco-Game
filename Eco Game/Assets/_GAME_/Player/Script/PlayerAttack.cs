@@ -51,14 +51,14 @@ public class PlayerAttack : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 1f); // Check for trash in range
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Trash"))
+            if (collider.CompareTag("Enemy"))
             {
                 // Get the TrashHealth component and deal damage
-                TrashHealth trashHealth = collider.GetComponent<TrashHealth>();
+                EnemyHealth trashHealth = collider.GetComponent<EnemyHealth>();
                 if (trashHealth != null)
                 {
                     trashHealth.TakeDamage(attackDamage);
-                    Debug.Log("Health remaining: " + trashHealth.getHealth());// Deal damage to trash
+                    Debug.Log("Health remaining Enemy: " + trashHealth.getHealth());// Deal damage to trash
                 }
             }
         }

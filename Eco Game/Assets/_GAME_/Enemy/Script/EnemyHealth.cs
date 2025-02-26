@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class TrashHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] public float health = 10f;  // Default health for each trash piece
+    [SerializeField] public float health = 100f;  // Default health for each trash piece
 
     public void TakeDamage(float damage)
     {
