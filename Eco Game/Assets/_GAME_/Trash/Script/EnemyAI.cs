@@ -1,97 +1,99 @@
 using UnityEngine;
 
-public enum EnemyState { Idle, Alerted, Attacking }
-
 public class EnemyAI : MonoBehaviour
 {
-    public EnemyState currentState = EnemyState.Idle;
-    public float moveSpeed = 3f;
-    public float attackRange = 1f;
+    public enum State { Idle, Alerted, Attacking }
+    public State currentState;
 
-    private FieldOfView fov;
-    private Transform player;
-    private Rigidbody2D rb;
-    private bool playerInAttackRange;
+    public float sightRadius = 10f;  // Distanza di visibilità
+    public float attackRadius = 2f;  // Distanza di attacco
+    public float fieldOfViewAngle = 60f;  // Angolo di visibilità
+    public Transform player;  // Riferimento al giocatore
 
-    void Start()
+    private Vector2 lastKnownPlayerPosition;  // Posizione del giocatore quando è stato visto
+
+    private void Start()
     {
-        fov = GetComponentInChildren<FieldOfView>();
-        rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        currentState = State.Idle;
     }
 
-    void Update()
+    private void Update()
     {
         switch (currentState)
         {
-            case EnemyState.Idle:
-                UpdateIdleState();
+            case State.Idle:
+                CheckForPlayer();
                 break;
-
-            case EnemyState.Alerted:
-                UpdateAlertedState();
+            case State.Alerted:
+                PursuePlayer();
                 break;
-
-            case EnemyState.Attacking:
-                UpdateAttackingState();
+            case State.Attacking:
+                AttackPlayer();
                 break;
         }
     }
 
-    void UpdateIdleState()
+    // Controlla se il giocatore è nel campo visivo
+    void CheckForPlayer()
     {
-        if (fov.PlayerVisible)
+        Vector2 directionToPlayer = player.position - transform.position;
+        float distanceToPlayer = directionToPlayer.magnitude;
+
+        // Se il giocatore è nel raggio di visibilità
+        if (distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer))
         {
-            currentState = EnemyState.Alerted;
+            lastKnownPlayerPosition = player.position;
+            currentState = State.Alerted;
         }
     }
 
-    void UpdateAlertedState()
+    // Insegui il giocatore se è all'interno del campo visivo
+    void PursuePlayer()
     {
-        // Movimento verso il giocatore
-        Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
+        Vector2 directionToPlayer = player.position - transform.position;
+        float distanceToPlayer = directionToPlayer.magnitude;
 
-        // Rotazione verso il giocatore
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rb.MoveRotation(angle);
+        // Ruota il nemico verso il giocatore (solo in 2D)
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        // Transizioni
-        if (!fov.PlayerVisible)
+        // Insegui il giocatore se è dentro il raggio di visibilità
+        if (distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer))
         {
-            currentState = EnemyState.Idle;
-            rb.linearVelocity = Vector2.zero;
+            // Muovi verso il giocatore
+            transform.position = Vector2.MoveTowards(transform.position, player.position, Time.deltaTime * 2f);
+
+            // Se il giocatore è abbastanza vicino, passa allo stato Attacking
+            if (distanceToPlayer <= attackRadius)
+            {
+                currentState = State.Attacking;
+            }
         }
-        else if (playerInAttackRange)
+        else
         {
-            currentState = EnemyState.Attacking;
-            rb.linearVelocity = Vector2.zero;
+            // Se il giocatore non è più nel campo visivo, torna in Idle
+            currentState = State.Idle;
         }
     }
 
-    void UpdateAttackingState()
+    // Attacca il giocatore se è abbastanza vicino
+    void AttackPlayer()
     {
-        // Logica di attacco qui
-
-        if (!playerInAttackRange)
+        // Il nemico rimane fermo
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceToPlayer > attackRadius)
         {
-            currentState = EnemyState.Alerted;
+            currentState = State.Alerted;
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // Verifica se il giocatore è nel campo visivo
+    bool IsPlayerInSight(Vector2 directionToPlayer)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerInAttackRange = true;
-        }
-    }
+        // Calcola l'angolo tra la direzione del nemico e la direzione verso il giocatore
+        float angle = Vector2.Angle(transform.right, directionToPlayer);
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInAttackRange = false;
-        }
+        // Verifica se il giocatore è nel campo visivo del nemico (60 gradi)
+        return angle <= fieldOfViewAngle / 2f;
     }
 }
