@@ -14968,7 +14968,7 @@ MonoBehaviour:
   maxSpeed: 3
   acceleration: 5
   deceleration: 5
-  player: {fileID: 0}
+  player: {fileID: 854599122}
 --- !u!1 &1974054530
 GameObject:
   m_ObjectHideFlags: 0
@@ -15014,6 +15014,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fa2b7b4b6a5d0439b434ff5410e679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attack: {fileID: 2459261670569955527, guid: 9863e39c075804c4d96c88d2249f2479, type: 3}
+  attackTransform: {fileID: 871680193}
+  canAttack: 1
+  coolDown: 0.6
 --- !u!1 &2070427618
 GameObject:
   m_ObjectHideFlags: 0
