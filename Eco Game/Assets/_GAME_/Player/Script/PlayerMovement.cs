@@ -39,4 +39,5 @@ public class PlayerMovement : MonoBehaviour
         // Smoothly transition to the target velocity
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
     }
+
 }
