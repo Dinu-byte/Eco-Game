@@ -14784,7 +14784,8 @@ GameObject:
   - component: {fileID: 1903183033}
   - component: {fileID: 1903183035}
   - component: {fileID: 1903183036}
-  m_Layer: 3
+  - component: {fileID: 1903183037}
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -14891,7 +14892,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -14969,6 +14970,19 @@ MonoBehaviour:
   acceleration: 5
   deceleration: 5
   player: {fileID: 854599122}
+--- !u!114 &1903183037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903183028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa38cff9f721a7c4da6fd822f2c8d49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1974054530
 GameObject:
   m_ObjectHideFlags: 0
@@ -15014,10 +15028,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fa2b7b4b6a5d0439b434ff5410e679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 2459261670569955527, guid: 9863e39c075804c4d96c88d2249f2479, type: 3}
   attackTransform: {fileID: 871680193}
-  canAttack: 1
-  coolDown: 0.6
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  attackRange: 1.4
+  coolDown: 0.8
+  attackDamage: 60
 --- !u!1 &2070427618
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,13 +30,13 @@ public class EnemyAttack : MonoBehaviour
     private void Attack()
     {
 
-        // Check for nearby trash objects using a circle detection
+        // Check for player using a circle detection
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range); // Check for Player in range
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                // Get the TrashHealth component and deal damage
+                // Get the playerHealth component and deal damage
                 PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {

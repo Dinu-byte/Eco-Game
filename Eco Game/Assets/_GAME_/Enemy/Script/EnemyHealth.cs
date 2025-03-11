@@ -2,19 +2,38 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] public float health = 100f;  // Default health for each trash piece
+    public float health;
+    private float currentHeath;
 
-    public void TakeDamage(float damage)
+    private void Start()
     {
-        health -= damage;  // Reduce health by damage amount
-        if (health <= 0)
+        currentHeath = health;
+    }
+
+    public void takeDamage(float damage)
+    {
+        currentHeath -= damage;
+
+        // place here animation for enemy
+
+        if (currentHeath <= 0)
         {
-            Destroy(gameObject);  // Destroy the trash when health reaches 0
+            Die();
         }
     }
 
-    public float getHealth()
+    void Die ()
     {
-        return health;
+        Debug.Log("Enemy died!");
+
+        // place here animation
+
+        // disable or destroy the enemy
+
+        this.enabled = false; // enemy health script
+        GetComponent<EnemyAI>().enabled = false;
+        GetComponent<EnemyAttack>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
     }
 }

@@ -1,19 +1,25 @@
+using System;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
-    public GameObject attack;
     public Transform attackTransform;
-    public bool canAttack;
+    private bool canAttack;
+
+    public LayerMask enemyLayer;
+
     private float timer;
+    public float attackRange;
     public float coolDown;
+    public float attackDamage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        canAttack = true;
     }
 
     // Update is called once per frame
@@ -40,7 +46,26 @@ public class Shooting : MonoBehaviour
         if (Input.GetMouseButton(0) && canAttack)
         {
             canAttack = false;
-            Instantiate(attack, attackTransform.position, Quaternion.identity);
+            attack();
         }
     }
+
+    void attack ()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTransform.position, attackRange, enemyLayer);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("Enemy hit");
+            enemy.GetComponent<EnemyHealth>().takeDamage(attackDamage);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackTransform == null) return;
+        
+        Gizmos.DrawWireSphere(attackTransform.position, attackRange);
+    }
+
 }
