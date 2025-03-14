@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    public enum State { Idle, Alerted, Attacking }
-    public State currentState;
+    private enum State { Idle, Alerted, Attacking }
+    private State currentState;
 
     [SerializeField] private float sightRadius = 10f;
     [SerializeField] private float attackRadius = 2f;
