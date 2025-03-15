@@ -5,49 +5,120 @@ using System.Collections;
 public class PaperShooting : MonoBehaviour
 
 {
+    private enum State { Idle, Alerted, Attacking }
+    private State currentState;
+
+    [SerializeField] private float sightRadius = 10f;
+    [SerializeField] private float attackRadius = 2f;
+    [SerializeField] private float fieldOfViewAngle = 60f;
+    [SerializeField] private float maxSpeed = 3f;  // Max movement speed
+    [SerializeField] private float acceleration = 5f;  // Acceleration speed
+    [SerializeField] private float deceleration = 5f;  // Deceleration speed
+    [SerializeField] private float shootCooldown = 2f;
+
+    private float timer = 0f;
+
+    public Transform player;
     public GameObject bullet;
     public Transform bulletPos;
-    public float attackCooldown; // Time between attacks
-    private bool canAttack; // Whether the player can attack
-    public float attackDamage; // Amount of damage dealt to trash per attack
-    [SerializeField] public float range;
-    //private Animator animator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private Vector2 lastKnownPlayerPosition;
+    private Vector3 originalScale;
+    private Rigidbody2D rb;
+    private Vector2 currentVelocity;
+
+    private void Start()
     {
-        canAttack = true;
+        currentState = State.Idle;
+        originalScale = transform.localScale;
+        rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
     }
 
-    private void Awake()
-    {
-        //animator = GetComponent<Animator>(); // Get the Animator component
-    }
-
-    // This method gets triggered when the "Attack" action (F key press) is performed
     private void Update()
     {
-        if (canAttack)
+        switch (currentState)
         {
-            //animator.ResetTrigger("AttackTrigger");
-            shoot();
-            //animator.SetTrigger("AttackTrigger");
-            StartCoroutine(AttackCooldown());
+            case State.Idle:
+                CheckForPlayer();
+                break;
+            case State.Alerted:
+                break;  // Movement is now handled in FixedUpdate()
+            case State.Attacking:
+                AttackPlayer();
+                break;
         }
     }
 
-    private void shoot()
+    private void FixedUpdate()
     {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        if (currentState == State.Alerted)
+        {
+            MoveTowardsPlayer();
+        }
     }
 
-    private IEnumerator AttackCooldown()
+    void CheckForPlayer()
     {
-        canAttack = false; // Disable further attacks during cooldown
-        yield return new WaitForSeconds(attackCooldown); // Wait for the cooldown duration
-        canAttack = true; // Re-enable attacks after cooldown
+        Vector2 directionToPlayer = player.position - transform.position;
+        float distanceToPlayer = directionToPlayer.magnitude;
 
-        // Reset the attack trigger after the cooldown
-        //animator.ResetTrigger("AttackTrigger");
+        if (distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer))
+        {
+            lastKnownPlayerPosition = player.position;
+            currentState = State.Alerted;
+        }
+    }
+
+    void MoveTowardsPlayer()
+    {
+        Vector2 directionToPlayer = (player.position - transform.position).normalized;
+        Vector2 targetVelocity = directionToPlayer * maxSpeed;
+
+        // Smooth acceleration & deceleration
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (directionToPlayer.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
+
+        // Adjust sprite direction
+        if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
+        {
+            transform.localScale = new Vector3(originalScale.x * (directionToPlayer.x > 0 ? 1 : -1), originalScale.y, originalScale.z);
+        }
+
+        // Switch to attacking if close enough
+        if (Vector2.Distance(transform.position, player.position) <= attackRadius)
+        {
+            currentState = State.Attacking;
+            rb.linearVelocity = Vector2.zero;  // Stop moving when attacking
+        }
+    }
+
+    void AttackPlayer()
+    {
+        if (Vector2.Distance(transform.position, player.position) > attackRadius)
+        {
+            currentState = State.Alerted;
+            timer = 0f;
+
+        }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer >= shootCooldown)
+            {
+                shoot();
+                timer = 0f;
+            }
+        }
+
+    }
+
+    bool IsPlayerInSight(Vector2 directionToPlayer)
+    {
+        float angle = Vector2.Angle(transform.right, directionToPlayer);
+        return angle <= fieldOfViewAngle / 2f;
+    }
+
+    void shoot ()
+    {
+        Instantiate(bullet, bulletPos.position, Quaternion.identity);
     }
 }

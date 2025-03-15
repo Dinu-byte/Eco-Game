@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 5074264262737837937}
   - component: {fileID: 4304612430052495570}
   - component: {fileID: 6356682285646306716}
-  - component: {fileID: 4821117755212009857}
-  - component: {fileID: 8083955502249104022}
-  - component: {fileID: 6457515999847716797}
-  m_Layer: 7
+  - component: {fileID: -6416293840203712725}
+  - component: {fileID: 5840769335156005529}
+  m_Layer: 9
   m_Name: Paper
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -122,7 +121,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -163,9 +162,9 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4821117755212009857
+--- !u!114 &-6416293840203712725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,33 +173,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 956198018672487574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bac3e5199128ef148975719451b8a2e6, type: 3}
+  m_Script: {fileID: 11500000, guid: db01ddf7d63686646bcff4525645985a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 1.5
-  attackDamage: 5
-  range: 2
---- !u!114 &8083955502249104022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956198018672487574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f8b62a9f9804146a2a74badfb818d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
   sightRadius: 10
-  attackRadius: 2
+  attackRadius: 6
   fieldOfViewAngle: 60
-  maxSpeed: 3
+  maxSpeed: 2.5
   acceleration: 5
   deceleration: 5
+  shootCooldown: 1.5
   player: {fileID: 0}
---- !u!114 &6457515999847716797
+  bullet: {fileID: 5732923047757339130, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
+  bulletPos: {fileID: 9116237212651740201, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
+--- !u!114 &5840769335156005529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,4 +198,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa38cff9f721a7c4da6fd822f2c8d49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 80

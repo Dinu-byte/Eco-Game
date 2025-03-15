@@ -90,6 +90,7 @@ public class EnemyAI : MonoBehaviour
             currentState = State.Alerted;
 
         }
+
     }
 
     bool IsPlayerInSight(Vector2 directionToPlayer)
