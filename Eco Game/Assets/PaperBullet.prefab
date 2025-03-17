@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 8
-  damage: 15
+  damage: 5
   timeAlive: 2
 --- !u!61 &-8837087432682572497
 BoxCollider2D:

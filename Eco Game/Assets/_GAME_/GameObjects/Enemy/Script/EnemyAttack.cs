@@ -40,8 +40,7 @@ public class EnemyAttack : MonoBehaviour
                 PlayerHealth playerHealth = collider.GetComponent<PlayerHealth>();
                 if (playerHealth != null)
                 {
-                    playerHealth.TakeDamage(attackDamage);
-                    Debug.Log("Health remaining Player: " + playerHealth.getHealth());// Deal damage to Player
+                    playerHealth.TakeDamage(gameObject, attackDamage); //deal damage to player.
                 }
             }
         }
