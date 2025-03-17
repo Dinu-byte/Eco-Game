@@ -29,11 +29,8 @@ public class EnemyHealth : MonoBehaviour
         // place here animation
 
         // disable or destroy the enemy
-
-        this.enabled = false; // enemy health script
-        GetComponent<EnemyAI>().enabled = false;
-        GetComponent<EnemyAttack>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
+        
+        Destroy(gameObject);
 
     }
 }
