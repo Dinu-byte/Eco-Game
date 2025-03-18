@@ -19,9 +19,9 @@ public class EnemyHealth : MonoBehaviour
         currentHeath = health;
     }
 
-    public void takeDamage(GameObject player)
+    public void takeDamage(GameObject player, float damage)
     {
-        currentHeath -= player.GetComponent<Shooting>().attackDamage;
+        currentHeath -= damage;
         PlayFeedback(player);
 
 

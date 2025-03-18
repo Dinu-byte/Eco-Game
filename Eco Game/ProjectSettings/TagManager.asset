@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Attack
   - HitBox
+  - RotatePoint
   layers:
   - Default
   - TransparentFX
