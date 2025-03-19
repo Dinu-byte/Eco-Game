@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1904
     height: 1021
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 382}
   m_MaxSize: {x: 10000, y: 10000}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 49
+  controlID: 105
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -388,7 +388,7 @@ MonoBehaviour:
     m_CachedPref: 199
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 185212
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/_GAME_/World/Sprites/Outside
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -452,16 +452,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/_GAME_/World/Sprites/Outside
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Scuola\Unity\Eco-Game\Eco Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e8d50200
-    m_LastClickedID: 185832
-    m_ExpandedIDs: 000000009e340100ded50200e0d50200e2d50200e4d50200e6d50200e8d5020000ca9a3b
+    m_SelectedIDs: 3adb0200
+    m_LastClickedID: 187194
+    m_ExpandedIDs: 000000007c34010042d9020044d9020046d9020048d902004ad902004cd9020000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -490,7 +490,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009e340100ded50200e0d50200e2d50200e4d50200e6d50200e8d50200
+    m_ExpandedIDs: 000000007c34010042d9020044d9020046d9020048d902004ad902004cd90200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -587,9 +587,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7cd30200
-      m_LastClickedID: 185212
-      m_ExpandedIDs: 94faffffc0d20200c8d20200e4d202002ed30200b4d30200
+      m_SelectedIDs: ccd60200
+      m_LastClickedID: 186060
+      m_ExpandedIDs: e8faffff36d6020086d602000cd70200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1193,9 +1193,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 45.363316, y: -105.62252, z: 5.340517}
+    m_Target: {x: 31.248287, y: -102.70632, z: -0.73219144}
     speed: 2
-    m_Value: {x: 45.363316, y: -105.62252, z: 5.340517}
+    m_Value: {x: 31.579166, y: -102.63439, z: -0.6891773}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1245,9 +1245,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 47.24953
+    m_Target: 99.88893
     speed: 2
-    m_Value: 47.24953
+    m_Value: 95.587494
   m_Ortho:
     m_Target: 1
     speed: 2
