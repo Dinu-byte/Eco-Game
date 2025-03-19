@@ -8,42 +8,68 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] public float health;  // Default health for each trash piece
 
+    public HealthBarScript healthBarScript;
+
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private float strength, coolDown;
+    [SerializeField] private float strength, coolDownKnockback;
     [SerializeField] private float knockbackThreshold; /* this is the value of how much damage an enemy has to do to perform a big knockback on the player.
                                                         *  It is relative to the health of the player so it's in percentage (%) and IT MUST BE FROM 0 TO 1. */
     [SerializeField] private float immunityTime;
-    private float timer;
+    [SerializeField] private float coolDownHeal;
+    [SerializeField] private float healValue;
+    private float currentHealth;
+    private float timerHit;
+    private float timerHeal;
     private bool canBeHit;
+    private bool canHeal;
 
     [SerializeField] private float knockbackMultiplier;
     public UnityEvent OnBegin, OnDone;
 
     private void Start()
     {
-        timer = 0;
+        timerHit = 0;
+        timerHeal = 0;
         canBeHit = true;
+        canHeal = true;
+        currentHealth = health;
+        healthBarScript.setMaxHealth(health);
     }
     private void Update()
     {
-        if (!canBeHit) timer += Time.deltaTime;
-        if (timer > immunityTime)
+        if (!canBeHit) timerHit += Time.deltaTime;
+        if (timerHit > immunityTime)
         {
             canBeHit = true;
-            timer = 0;
+            timerHit = 0;
+        }
+
+        if (canHeal && Input.GetKey(KeyCode.Space) && currentHealth < health)
+        {
+            heal();
+        }
+        else
+        {
+            timerHeal += Time.deltaTime;
+            if (timerHeal >= coolDownHeal)
+            {
+                canHeal = true;
+                timerHeal = 0;
+            }
         }
     }
     public void TakeDamage(GameObject enemy, float damage)
     {
         if (canBeHit)
         {
-            Debug.Log("Player health:" + health);
-            health -= damage;  // Reduce health by damage amount
+            currentHealth -= damage;  // Reduce health by damage amount
+            healthBarScript.setHealth(currentHealth);
+            Debug.Log("Player hit! Player health: " + currentHealth);
             PlayFeedback(enemy, damage);
 
             canBeHit = false;
 
-            if (health <= 0)
+            if (currentHealth <= 0)
             {
                 Die();  // Destroy the trash when health reaches 0
             }
@@ -53,7 +79,20 @@ public class PlayerHealth : MonoBehaviour
 
     public float getHealth()
     {
-        return health;
+        return currentHealth;
+    }
+
+    private void heal ()
+    {
+        currentHealth += healValue;
+        if (currentHealth > health)
+        {
+            currentHealth = health;
+        }
+        healthBarScript.setHealth(currentHealth);
+        canHeal = false;
+
+        Debug.Log("Player healed! Player health: " + currentHealth);
     }
 
     public void Die()
@@ -86,7 +125,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator Reset()
     {
-        yield return new WaitForSeconds(coolDown);
+        yield return new WaitForSeconds(coolDownKnockback);
         rb.linearVelocity = Vector3.zero;
         OnDone?.Invoke();
     }

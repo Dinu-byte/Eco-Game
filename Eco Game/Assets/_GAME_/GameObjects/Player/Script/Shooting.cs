@@ -85,8 +85,11 @@ public class Shooting : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Enemy hit");
-            enemy.GetComponent<EnemyHealth>().takeDamage(this.gameObject, attackDamage);
+            if (enemy.CompareTag("Enemy"))
+            {
+                Debug.Log("Enemy hit");
+                enemy.GetComponent<EnemyHealth>().takeDamage(this.gameObject, attackDamage);
+            }
         }
     }
 
