@@ -101,8 +101,9 @@ public class PlayerHealth : MonoBehaviour
 
         // place here animation
 
+        // load game over screen and music/sound effects.
 
-        Destroy(gameObject); // destroy the player
+        gameObject.SetActive(false); // disable the player
 
     }
 

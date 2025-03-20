@@ -28,16 +28,19 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        switch (currentState)
+        if (Time.frameCount % 10 == 0)
         {
-            case State.Idle:
-                CheckForPlayer();
-                break;
-            case State.Alerted:
-                break;  // Movement is now handled in FixedUpdate()
-            case State.Attacking:
-                AttackPlayer();
-                break;
+            switch (currentState)
+            {
+                case State.Idle:
+                    CheckForPlayer();
+                    break;
+                case State.Alerted:
+                    break;  // Movement is now handled in FixedUpdate()
+                case State.Attacking:
+                    AttackPlayer();
+                    break;
+            }
         }
     }
 

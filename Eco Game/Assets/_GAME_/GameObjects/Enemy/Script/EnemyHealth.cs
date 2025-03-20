@@ -7,7 +7,10 @@ using UnityEngine.Events;
 public class EnemyHealth : MonoBehaviour
 {
     public float health;
-    private float currentHeath;
+    public float immunityTime;
+    private float currentHealth;
+    private bool canBeHit;
+    private float timerHit;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float strength, coolDown;
@@ -16,20 +19,35 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-        currentHeath = health;
+        timerHit = 0;
+        canBeHit = true;
+        currentHealth = health;
+    }
+
+    private void Update()
+    {
+        if (!canBeHit) timerHit += Time.deltaTime;
+        if (timerHit > immunityTime)
+        {
+            canBeHit = true;
+            timerHit = 0;
+        }
     }
 
     public void takeDamage(GameObject player, float damage)
     {
-        currentHeath -= damage;
-        PlayFeedback(player);
-
-
-        // place here animation for enemy
-
-        if (currentHeath <= 0)
+        if (canBeHit)
         {
-            Die();
+            currentHealth -= damage;
+            PlayFeedback(player);
+
+
+            // place here animation for enemy
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
         }
     }
 

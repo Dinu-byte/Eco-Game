@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  immunityTime: 0.4
   rb: {fileID: 9189990438213647972}
   strength: 50
   coolDown: 0.1
