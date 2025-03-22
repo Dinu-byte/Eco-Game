@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -32,15 +33,37 @@ public class DialogueUI : MonoBehaviour
         for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
         {
             string dialogue = dialogueObject.Dialogue[i];
-            yield return typeWriterEffect.Run(dialogue, textLabel);
 
-            if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.hasResponses) break;
+            yield return RunTypingEffect(dialogue);
+
+            textLabel.text = dialogue;
+
+            if (i == dialogueObject.Dialogue.Length - 1) break;
+
+            yield return null;
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+
+        yield return new WaitForSeconds(0.3f);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E)); // wait for the player to press E to close the dialogue box.
         CloseDialogueBox();
 
+    }
+
+    private IEnumerator RunTypingEffect(string dialogue)
+    {
+        typeWriterEffect.Run(dialogue, textLabel);
+
+        while (typeWriterEffect.isRunning)
+        {
+            yield return null;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                typeWriterEffect.Stop();
+            }
+        }
     }
 
     private void CloseDialogueBox ()
@@ -49,4 +72,5 @@ public class DialogueUI : MonoBehaviour
         dialogueBox.SetActive(false);
         textLabel.text = string.Empty;
     }
+
 }
