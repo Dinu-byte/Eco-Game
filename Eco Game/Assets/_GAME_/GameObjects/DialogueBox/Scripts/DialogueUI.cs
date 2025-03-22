@@ -9,18 +9,19 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
 
     private TypeWriterEffect typeWriterEffect;
-    private ResponseHandler responseHandler;
+
+    public bool IsOpen {  get; private set; }
+
 
     private void Start()
     {
         typeWriterEffect = GetComponent<TypeWriterEffect>();
-        responseHandler = GetComponent<ResponseHandler>();
         CloseDialogueBox();
-        ShowDialogue(testDialogue);
     }
 
     public void ShowDialogue (DialogueObject dialogueObject)
     {
+        IsOpen = true;
         dialogueBox.SetActive(true);
         StartCoroutine(StepThroughDialogue(dialogueObject));
     }
@@ -37,19 +38,14 @@ public class DialogueUI : MonoBehaviour
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+        CloseDialogueBox();
 
-        if (dialogueObject.hasResponses)
-        {
-            responseHandler.ShowResponses(dialogueObject.Responses);
-        }
-        else
-        {
-            CloseDialogueBox();
-        }
     }
 
     private void CloseDialogueBox ()
     {
+        IsOpen = false;
         dialogueBox.SetActive(false);
         textLabel.text = string.Empty;
     }

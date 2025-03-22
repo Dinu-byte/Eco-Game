@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerInput inputActions;
 
+    [SerializeField] private DialogueUI dialogueUI;
+    public DialogueUI DialogueUI => dialogueUI;
+    public IInteractable Interactable { get; set; }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,13 +35,27 @@ public class PlayerMovement : MonoBehaviour
         inputActions.Disable();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        if (dialogueUI.IsOpen)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (Interactable != null)
+            {
+                Interactable.Interact(this);
+            }
+        }
         // Target velocity based on input
         Vector2 targetVelocity = movementInput * maxSpeed;
 
         // Smoothly transition to the target velocity
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
+
     }
 
 }
