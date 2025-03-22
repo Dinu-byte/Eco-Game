@@ -15,3 +15,8 @@ MonoBehaviour:
   dialogue:
   - I am a nigger (1st text)
   - I am a white male (2nd text)
+  responses:
+  - responseText: Yes
+    dialogueObject: {fileID: 11400000, guid: 8bd75151b050da542b03e8be143657cf, type: 2}
+  - responseText: No
+    dialogueObject: {fileID: 11400000, guid: fac4ae6317be28745a0b2621603fcb32, type: 2}

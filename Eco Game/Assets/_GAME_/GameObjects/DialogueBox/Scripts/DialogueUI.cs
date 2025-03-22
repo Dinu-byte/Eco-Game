@@ -9,10 +9,12 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private GameObject dialogueBox;
 
     private TypeWriterEffect typeWriterEffect;
+    private ResponseHandler responseHandler;
 
     private void Start()
     {
         typeWriterEffect = GetComponent<TypeWriterEffect>();
+        responseHandler = GetComponent<ResponseHandler>();
         CloseDialogueBox();
         ShowDialogue(testDialogue);
     }
@@ -26,13 +28,24 @@ public class DialogueUI : MonoBehaviour
     private IEnumerator StepThroughDialogue (DialogueObject dialogueObject)
     {
 
-        foreach (string dialogue in dialogueObject.Dialogue)
+        for (int i = 0; i < dialogueObject.Dialogue.Length; i++)
         {
+            string dialogue = dialogueObject.Dialogue[i];
             yield return typeWriterEffect.Run(dialogue, textLabel);
+
+            if (i == dialogueObject.Dialogue.Length - 1 && dialogueObject.hasResponses) break;
+
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
         }
 
-        CloseDialogueBox();
+        if (dialogueObject.hasResponses)
+        {
+            responseHandler.ShowResponses(dialogueObject.Responses);
+        }
+        else
+        {
+            CloseDialogueBox();
+        }
     }
 
     private void CloseDialogueBox ()
