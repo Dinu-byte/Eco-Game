@@ -10,6 +10,7 @@ public class PaperShooting : MonoBehaviour
 
     [SerializeField] private float sightRadius = 10f;
     [SerializeField] private float attackRadius = 2f;
+    [SerializeField] private float alertedRadius = 2.4f;
     [SerializeField] private float fieldOfViewAngle = 60f;
     [SerializeField] private float maxSpeed = 3f;  // Max movement speed
     [SerializeField] private float acceleration = 5f;  // Acceleration speed
@@ -18,7 +19,7 @@ public class PaperShooting : MonoBehaviour
 
     private float timer = 0f;
 
-    public Transform player;
+    private Transform player;
     public GameObject bullet;
     public Transform bulletPos;
 
@@ -31,6 +32,7 @@ public class PaperShooting : MonoBehaviour
     {
         currentState = State.Idle;
         originalScale = transform.localScale;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
     }
 
@@ -62,7 +64,7 @@ public class PaperShooting : MonoBehaviour
         Vector2 directionToPlayer = player.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if (distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer))
+        if ((distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer)) || distanceToPlayer <= alertedRadius)
         {
             lastKnownPlayerPosition = player.position;
             currentState = State.Alerted;

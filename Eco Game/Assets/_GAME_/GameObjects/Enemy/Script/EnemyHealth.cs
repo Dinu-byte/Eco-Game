@@ -12,6 +12,8 @@ public class EnemyHealth : MonoBehaviour
     private bool canBeHit;
     private float timerHit;
 
+    public int coinsDropped;
+
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float strength, coolDown;
 
@@ -46,18 +48,34 @@ public class EnemyHealth : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                Die();
+                Die(player);
             }
         }
     }
 
-    public void Die ()
+    public void Die (GameObject player)
     {
         Debug.Log("Enemy died!");
 
         // place here animation
+        // place here sound
 
-        
+        if (this.name == "Paper")
+        {
+            player.GetComponent<PlayerHealth>().addPaperKills();
+        }
+        else if (this.name == "Plastic")
+        {
+            player.GetComponent<PlayerHealth>().addPlasticKills();
+        }
+        else
+        {
+            player.GetComponent<PlayerHealth>().addTrashKills();
+        }
+
+        player.GetComponent<PlayerHealth>().addTotalKills();
+        player.GetComponent<PlayerHealth>().addCoins(coinsDropped);
+
         Destroy(gameObject); // destroy the enemy
 
     }

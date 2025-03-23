@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject shopMenu;
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
+            shopMenu.SetActive(false);
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
@@ -24,6 +26,12 @@ public class PauseMenu : MonoBehaviour
     {
 
     }
+
+    public void restart ()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public void home ()
     {
         SceneManager.LoadScene(0);

@@ -7,12 +7,13 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private float sightRadius = 10f;
     [SerializeField] private float attackRadius = 2f;
+    [SerializeField] private float alertedRadius = 2.4f;
     [SerializeField] private float fieldOfViewAngle = 60f;
     [SerializeField] private float maxSpeed = 3f;  // Max movement speed
     [SerializeField] private float acceleration = 5f;  // Acceleration speed
     [SerializeField] private float deceleration = 5f;  // Deceleration speed
 
-    public Transform player;
+    private Transform player;
 
     private Vector2 lastKnownPlayerPosition;
     private Vector3 originalScale;
@@ -23,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     {
         currentState = State.Idle;
         originalScale = transform.localScale;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
     }
 
@@ -57,7 +59,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 directionToPlayer = player.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if (distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer))
+        if ((distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer)) || distanceToPlayer <= alertedRadius)
         {
             lastKnownPlayerPosition = player.position;
             currentState = State.Alerted;

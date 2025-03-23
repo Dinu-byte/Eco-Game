@@ -88,7 +88,7 @@ public class Shooting : MonoBehaviour
             if (enemy.CompareTag("Enemy"))
             {
                 Debug.Log("Enemy hit");
-                enemy.GetComponent<EnemyHealth>().takeDamage(this.gameObject, attackDamage);
+                enemy.GetComponent<EnemyHealth>().takeDamage(player, attackDamage);
             }
         }
     }

@@ -6,7 +6,15 @@ using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverCanvas;
+
     [SerializeField] public float health;  // Default health for each trash piece
+
+    private int totalKills;
+    private int paperKills;
+    private int plasticKills;
+    private int trashKills;
+    public int coins;
 
     public HealthBarScript healthBarScript;
 
@@ -17,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float immunityTime;
     [SerializeField] private float coolDownHeal;
     [SerializeField] private float healValue;
+
     private float currentHealth;
     private float timerHit;
     private float timerHeal;
@@ -34,6 +43,12 @@ public class PlayerHealth : MonoBehaviour
         canHeal = true;
         currentHealth = health;
         healthBarScript.setMaxHealth(health);
+
+        totalKills = 0;
+        paperKills = 0;
+        plasticKills = 0;
+        trashKills = 0;
+        coins = 0;
     }
     private void Update()
     {
@@ -65,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= damage;  // Reduce health by damage amount
             healthBarScript.setHealth(currentHealth);
             Debug.Log("Player hit! Player health: " + currentHealth);
+            Debug.Log("Player kills:" + totalKills);
             PlayFeedback(enemy, damage);
 
             canBeHit = false;
@@ -103,6 +119,8 @@ public class PlayerHealth : MonoBehaviour
 
         // load game over screen and music/sound effects.
 
+        gameOverCanvas.SetActive(true);
+
         gameObject.SetActive(false); // disable the player
 
     }
@@ -129,5 +147,30 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(coolDownKnockback);
         rb.linearVelocity = Vector3.zero;
         OnDone?.Invoke();
+    }
+
+    public void addTotalKills() // methods for stats and money
+    {
+        totalKills++;
+    }
+
+    public void addPaperKills()
+    {
+        paperKills++;
+    }
+
+    public void addPlasticKills()
+    {
+        plasticKills++;
+    }
+
+    public void addTrashKills()
+    {
+        trashKills++;
+    }
+
+    public void addCoins (int coinsDropped)
+    {
+        coins += coinsDropped;
     }
 }
