@@ -32,6 +32,9 @@ public class PlayerHealth : MonoBehaviour
     private bool canBeHit;
     private bool canHeal;
 
+    public float damage;
+    public float boomerangDamage;
+
     [SerializeField] private float knockbackMultiplier;
     public UnityEvent OnBegin, OnDone;
 

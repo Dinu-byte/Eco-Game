@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 
@@ -14,7 +15,8 @@ public class Shooting : MonoBehaviour
     private bool canAttack;
     public float attackRange;
     public float coolDownAttack;
-    public float attackDamage;
+    private float attackDamage;
+    public float boomerangDamage;
 
     private float timerBoomerang; // boomerang variables
     private bool canBoomerang;
@@ -31,6 +33,7 @@ public class Shooting : MonoBehaviour
         canAttack = true;
         canBoomerang = true;
         boomerangReturned = true;
+        attackDamage = player.GetComponent<PlayerHealth>().damage;
     }
 
     // Update is called once per frame
