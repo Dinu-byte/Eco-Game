@@ -58,4 +58,11 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public void addSpeed ()
+    {
+        maxSpeed += 0.75f;
+        acceleration += 0.2f;
+        deceleration += 0.2f;
+    }
+
 }

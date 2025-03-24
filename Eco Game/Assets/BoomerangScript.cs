@@ -82,4 +82,9 @@ public class BoomerangScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void addForce ()
+    {
+        force += 0.75f;
+    }
+
 }

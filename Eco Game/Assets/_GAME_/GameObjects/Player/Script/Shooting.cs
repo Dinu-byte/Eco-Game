@@ -113,4 +113,16 @@ public class Shooting : MonoBehaviour
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 
+    public void addDamage ()
+    {
+        attackDamage += 5;
+    }
+
+    public void decreaseCoolDown()
+    {
+        coolDownAttack -= 0.1f;
+        coolDownBoomerang -= 0.05f;
+
+    }
+
 }
