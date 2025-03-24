@@ -3,7 +3,6 @@ using UnityEngine;
 public class ShopScript : MonoBehaviour
 {
     [SerializeField] GameObject shopMenu;
-    [SerializeField] GameObject shopPanel;
     private GameObject player;
 
     private bool isColliding;
@@ -26,7 +25,6 @@ public class ShopScript : MonoBehaviour
             {
                 shopMenu.SetActive(true);
                 player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-                shopPanel.GetComponent<ShopManager>().checkPurchaseable();
             }
         }
 

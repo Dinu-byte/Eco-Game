@@ -3,24 +3,18 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
-using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverCanvas;
-    [SerializeField] private TMP_Text coinCount;
 
     [SerializeField] public float health;  // Default health for each trash piece
 
-    private int totalKills; // statistics
+    private int totalKills;
     private int paperKills;
     private int plasticKills;
     private int trashKills;
     public int coins;
-
-    public float damage; // player skills
-    public float boomerangDamage;
 
     public HealthBarScript healthBarScript;
 
@@ -38,6 +32,8 @@ public class PlayerHealth : MonoBehaviour
     private bool canBeHit;
     private bool canHeal;
 
+    public float damage;
+    public float boomerangDamage;
 
     [SerializeField] private float knockbackMultiplier;
     public UnityEvent OnBegin, OnDone;
@@ -55,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
         paperKills = 0;
         plasticKills = 0;
         trashKills = 0;
-        coinCount.text = "Coins: " + coins.ToString();
+        coins = 0;
     }
     private void Update()
     {
@@ -179,27 +175,5 @@ public class PlayerHealth : MonoBehaviour
     public void addCoins (int coinsDropped)
     {
         coins += coinsDropped;
-        coinCount.text = "Coins: " + coins.ToString();
-    }
-
-    public void addBoomerangDamage ()
-    {
-        boomerangDamage += 5;
-
-    }
-
-    public void addMaxHealth ()
-    {
-        health += 25;
-        currentHealth = health;
-        healthBarScript.setMaxHealth(health);
-        healthBarScript.setHealth(currentHealth);
-        healValue += 15;
-
-    }
-
-    public void decreaseCoolDown ()
-    {
-        coolDownHeal -= 0.5f;
     }
 }
