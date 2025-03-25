@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip SFX_PLAYER_power_up;
     public AudioClip SFX_PLAYER_HIT_normal;
     public AudioClip SFX_PLAYER_HIT_hard;
+    public AudioClip SFX_UI_text;
     public AudioClip SFX_UI_hover;
     public AudioClip SFX_UI_select;
     public AudioClip SFX_UI_back;

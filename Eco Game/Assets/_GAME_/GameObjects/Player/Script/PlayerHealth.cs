@@ -131,6 +131,7 @@ public class PlayerHealth : MonoBehaviour
         // place here animation
 
         // load game over screen and music/sound effects.
+        audioManager.playSFX(audioManager.SFX_UI_gameOver);
 
         gameOverCanvas.SetActive(true);
 

@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public AudioManager audioManager;
+
     public float health;
     public float immunityTime;
     private float currentHealth;
@@ -21,6 +23,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         timerHit = 0;
         canBeHit = true;
         currentHealth = health;
@@ -42,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
         {
             currentHealth -= damage;
             PlayFeedback(player);
+            audioManager.playSFX(audioManager.SFX_MONSTER_HIT_normal);
 
 
             // place here animation for enemy
@@ -59,6 +63,7 @@ public class EnemyHealth : MonoBehaviour
 
         // place here animation
         // place here sound
+        audioManager.playSFX(audioManager.SFX_MONSTER_death);
 
         if (this.name == "Paper")
         {

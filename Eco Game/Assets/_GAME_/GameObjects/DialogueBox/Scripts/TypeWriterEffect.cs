@@ -23,6 +23,7 @@ private Coroutine typingCoroutine;
         typingCoroutine = StartCoroutine(TypeText(textToType,textLabel));
     }
 
+
     public void Stop ()
     {
         StopCoroutine(typingCoroutine);
@@ -45,9 +46,10 @@ private Coroutine typingCoroutine;
 
             for (int i = lastCharIndex; i < charIndex; i++)
             {
-                bool isLast = i >= textToType.Length - 1
-                    ;
+                bool isLast = i >= textToType.Length - 1;
+
                 textLabel.text = textToType.Substring(0, i + 1);
+                
 
                 if (isPunctuation(textToType[i], out float waitTime) && !isLast && !isPunctuation(textToType[i + 1], out float _))
                 {
