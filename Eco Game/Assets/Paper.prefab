@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -178,12 +178,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRadius: 10
   attackRadius: 6
+  alertedRadius: 2.4
   fieldOfViewAngle: 60
   maxSpeed: 2.5
   acceleration: 5
   deceleration: 5
   shootCooldown: 1.5
-  player: {fileID: 0}
   bullet: {fileID: 5732923047757339130, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
   bulletPos: {fileID: 9116237212651740201, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
 --- !u!114 &5840769335156005529
@@ -198,8 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa38cff9f721a7c4da6fd822f2c8d49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
   health: 80
   immunityTime: 0.4
+  coinsDropped: 5
   rb: {fileID: 6356682285646306716}
   strength: 70
   coolDown: 0.1

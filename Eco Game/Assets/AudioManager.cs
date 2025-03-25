@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip SFX_ATTACK_low;
     public AudioClip SFX_ATTACK_high;
     public AudioClip SFX_HEAL;
+    public AudioClip SFX_HEAL_can_heal;
+    public AudioClip SFX_HEAL_cannot_heal;
     public AudioClip SFX_PLAYER_power_up;
     public AudioClip SFX_PLAYER_HIT_normal;
     public AudioClip SFX_PLAYER_HIT_hard;
@@ -27,10 +29,19 @@ public class AudioManager : MonoBehaviour
     public AudioClip SFX_WALK_street;
     public AudioClip SFX_WALK_wood;
 
+    public AudioClip OST_play;
     public AudioClip OST_menu;
+
+    public AudioClip OST_currentOST;
     // OST playing and maybe game over.
 
     // private void start, starts with the music.
+
+    private void Awake()
+    {
+        musicSource.clip = OST_currentOST;
+        musicSource.Play();
+    }
 
     public void playSFX (AudioClip sfx)
     {

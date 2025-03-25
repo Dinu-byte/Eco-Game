@@ -50,11 +50,11 @@ public class PlayerMovement : MonoBehaviour
                 Interactable.Interact(this);
             }
         }
-        // Target velocity based on input
-        Vector2 targetVelocity = movementInput * maxSpeed;
+            // Target velocity based on input
+            Vector2 targetVelocity = movementInput * maxSpeed;
 
-        // Smoothly transition to the target velocity
-        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
+            // Smoothly transition to the target velocity
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
 
     }
 

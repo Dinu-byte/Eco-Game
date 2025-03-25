@@ -64,26 +64,36 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Update()
     {
-        if (!canBeHit) timerHit += Time.deltaTime;
+        if (!canBeHit) timerHit += Time.deltaTime; // immunity
         if (timerHit > immunityTime)
         {
             canBeHit = true;
             timerHit = 0;
         }
 
-        if (canHeal && Input.GetKey(KeyCode.Space) && currentHealth < health)
+        if (canHeal) // healing
         {
-            heal();
+            if (Input.GetKeyDown(KeyCode.Space) && currentHealth < health) heal();
         }
         else
         {
-            timerHeal += Time.deltaTime;
-            if (timerHeal >= coolDownHeal)
+            if (Input.GetKeyDown(KeyCode.Space) && currentHealth < health)
             {
-                canHeal = true;
-                timerHeal = 0;
+                audioManager.playSFX(audioManager.SFX_HEAL_cannot_heal);
+            }
+            else
+            {
+                timerHeal += Time.deltaTime;
+                if (timerHeal >= coolDownHeal)
+                {
+                    canHeal = true;
+                    timerHeal = 0;
+                    audioManager.playSFX(audioManager.SFX_HEAL_can_heal);
+                }
             }
         }
+
+        
     }
     public void TakeDamage(GameObject enemy, float damage)
     {

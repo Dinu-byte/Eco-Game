@@ -150,7 +150,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -194,11 +194,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightRadius: 5
   attackRadius: 1.5
+  alertedRadius: 2.4
   fieldOfViewAngle: 120
   maxSpeed: 2
   acceleration: 5
   deceleration: 5
-  player: {fileID: 0}
 --- !u!114 &4339370117831059212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,8 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa38cff9f721a7c4da6fd822f2c8d49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 0}
   health: 200
   immunityTime: 0.4
+  coinsDropped: 6
   rb: {fileID: 4470920354221248277}
   strength: 35
   coolDown: 0.1
