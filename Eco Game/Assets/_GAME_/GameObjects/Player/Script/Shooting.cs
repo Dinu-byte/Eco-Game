@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    public GameObject pauseMenu;
+    private AudioManager audioManager;
+
     private Camera mainCam;
     private Vector3 mousePos;
     public Transform attackTransform;
@@ -27,6 +30,7 @@ public class Shooting : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         player = GameObject.FindGameObjectWithTag("Player");
         canAttack = true;
@@ -49,9 +53,14 @@ public class Shooting : MonoBehaviour
         if (!canAttack)
         {
             timerAttack += Time.deltaTime;
-            if (timerAttack >= coolDownAttack) canAttack = true;
+            if (timerAttack >= coolDownAttack)
+            {
+                canAttack = true;
+                timerAttack = 0;
+            }
+            
         }
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (Input.GetMouseButtonDown(0) && canAttack && !pauseMenu.activeSelf)
         {
             canAttack = false;
             attack();
@@ -93,11 +102,14 @@ public class Shooting : MonoBehaviour
                 enemy.GetComponent<EnemyHealth>().takeDamage(player, attackDamage);
             }
         }
+
+        audioManager.playSFX(audioManager.SFX_ATTACK_high);
     }
 
     void launchBoomerang ()
     {
         Instantiate(boomerang, player.transform.position, Quaternion.identity);
+        audioManager.playSFX(audioManager.SFX_ATTACK_low);
     }
 
     public void setBoomerangReturned (bool b)

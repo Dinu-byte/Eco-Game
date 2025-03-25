@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ShopScript : MonoBehaviour
 {
+    private AudioManager audioManager;
+
     [SerializeField] GameObject shopMenu;
     [SerializeField] GameObject shopPanel;
     private GameObject player;
@@ -10,6 +12,7 @@ public class ShopScript : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -21,12 +24,14 @@ public class ShopScript : MonoBehaviour
             {
                 shopMenu.SetActive(false);
                 player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                audioManager.playSFX(audioManager.SFX_UI_back);
             }
             else
             {
                 shopMenu.SetActive(true);
                 player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
                 shopPanel.GetComponent<ShopManager>().checkPurchaseable();
+                audioManager.playSFX(audioManager.SFX_UI_select);
             }
         }
 
