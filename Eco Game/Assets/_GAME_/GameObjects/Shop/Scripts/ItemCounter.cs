@@ -2,8 +2,37 @@ using UnityEngine;
 
 public class ItemCounter
 {
-    private int timesBought = 0;
-    private bool canBeBought = true;
-    private int maxTimesBought = 5;
-    // set, get e rendere canBeBought false dopo 5 volte.
+    private int counter;
+    private bool canBeBought;
+    private int maxTimesBought;
+
+    public ItemCounter ()
+    {
+        counter = 0;
+        canBeBought = true;
+        maxTimesBought = 5;
+    }
+
+    public void addCounter ()
+    {
+        counter++;
+    }
+
+    public int getCounter ()
+    {
+        return counter;
+    }
+
+    public bool getCanBeBought ()
+    {
+        return canBeBought; 
+    }
+
+    public void checkTimesBought () 
+    {
+        if (counter >= maxTimesBought)
+        {
+            canBeBought = false;
+        }
+    }
 }

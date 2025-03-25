@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject gameOverCanvas;
     [SerializeField] private TMP_Text coinCount;
 
+    private AudioManager audioManager;
+
     [SerializeField] public float health;  // Default health for each trash piece
 
     private int totalKills; // statistics
@@ -21,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     public float damage; // player skills
     public float boomerangDamage;
+    public float boomerangSpeed;
 
     public HealthBarScript healthBarScript;
 
@@ -44,6 +47,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
         timerHit = 0;
         timerHeal = 0;
         canBeHit = true;
@@ -94,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                Die();  // Destroy the trash when health reaches 0
+                Die();  // Destroy the player when health reaches 0
             }
         }
         
@@ -114,6 +119,7 @@ public class PlayerHealth : MonoBehaviour
         }
         healthBarScript.setHealth(currentHealth);
         canHeal = false;
+        audioManager.playSFX(audioManager.SFX_HEAL);
 
         Debug.Log("Player healed! Player health: " + currentHealth);
     }
@@ -140,10 +146,12 @@ public class PlayerHealth : MonoBehaviour
         if (damage / health >= knockbackThreshold)
         {
             rb.AddForce(direction * strength * knockbackMultiplier, ForceMode2D.Impulse);
+            audioManager.playSFX(audioManager.SFX_PLAYER_HIT_hard);
         }
         else
         {
             rb.AddForce(direction * strength, ForceMode2D.Impulse);
+            audioManager.playSFX(audioManager.SFX_PLAYER_HIT_normal);
         }
         StartCoroutine(Reset());
 
@@ -201,5 +209,15 @@ public class PlayerHealth : MonoBehaviour
     public void decreaseCoolDown ()
     {
         coolDownHeal -= 0.5f;
+    }
+
+    public void addBoomerangSpeed()
+    {
+        boomerangSpeed += 0.75f;
+    }
+
+    public void addImmunity ()
+    {
+        immunityTime += 0.1f;
     }
 }

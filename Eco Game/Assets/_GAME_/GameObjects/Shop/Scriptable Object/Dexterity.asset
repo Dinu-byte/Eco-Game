@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Dexterity
   m_EditorClassIdentifier: 
   title: Dexterity
-  description: Decreases the attack and heal cooldowns
+  description: Decreases cooldowns and increases immunity.
   baseCost: 15

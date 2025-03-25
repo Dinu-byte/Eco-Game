@@ -9,7 +9,7 @@ public class BoomerangScript : MonoBehaviour
     private Rigidbody2D rb;
     private float timer; // timer to count when it should return to the player
     private bool returning; // boolean for when it's returning
-    public float force; // the force (basically the speed) applied to the boomerang.
+    private float force; // the force (basically the speed) applied to the boomerang.
     private float damage; // damage dealt to enemies.
     public float timeBeforeReturn; // time before it returns to the player
     public float distanceDestroyed; // developer things, too complicated to explain (it solves a problem so it is usefull, DO NOT DELETE).
@@ -26,6 +26,7 @@ public class BoomerangScript : MonoBehaviour
         returning = false;
         timer = 0;
         damage = player.GetComponent<PlayerHealth>().boomerangDamage;
+        force = player.GetComponent<PlayerHealth>().boomerangSpeed;
 
         Vector3 direction = mousePos - transform.position;
         rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force;
@@ -82,9 +83,5 @@ public class BoomerangScript : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void addForce ()
-    {
-        force += 0.75f;
-    }
 
 }

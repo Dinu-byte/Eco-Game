@@ -9,6 +9,7 @@ TagManager:
   - Attack
   - HitBox
   - RotatePoint
+  - Audio
   layers:
   - Default
   - TransparentFX

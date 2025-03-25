@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Speed
   m_EditorClassIdentifier: 
   title: Speed
-  description: Increases the movement speed.
+  description: Increases the movement speed and the ranged attack's speed.
   baseCost: 15

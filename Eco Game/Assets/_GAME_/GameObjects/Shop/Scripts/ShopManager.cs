@@ -10,6 +10,7 @@ public class ShopManager : MonoBehaviour
     public ShopTemplate[] shopPanels;
     public Button[] purchaseButtons;
     private int[] costs;
+    private ItemCounter[] checks;
 
     public float costMultiplier;
 
@@ -17,9 +18,14 @@ public class ShopManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         costs = new int[itemsSO.Length];
+        checks = new ItemCounter[itemsSO.Length];
         for (int i = 0; i < itemsSO.Length; i++)
         {
             shopPanelsGO[i].SetActive(true);
+        }
+        for (int i = 0; i < checks.Length; i++)
+        {
+            checks[i] = new ItemCounter();
         }
         loadCosts();
         loadPanels();
@@ -48,14 +54,16 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < itemsSO.Length; i++)
         {
-            if (player.GetComponent<PlayerHealth>().coins >= costs[i])
-            {
-                purchaseButtons[i].interactable = true;
-            }
-            else
-            {
-                purchaseButtons[i].interactable = false;
-            }
+            
+                if (player.GetComponent<PlayerHealth>().coins >= costs[i] && checks[i].getCanBeBought())
+                {
+                    purchaseButtons[i].interactable = true;
+                }
+                else
+                {
+                    purchaseButtons[i].interactable = false;
+                }
+                 
         }
     }
 
@@ -71,6 +79,8 @@ public class ShopManager : MonoBehaviour
             player.GetComponent<PlayerHealth>().addCoins(-costs[btnNo]);
             costs[btnNo] = Mathf.RoundToInt(costs[btnNo] * costMultiplier); // when you upgrade, the cost gets higher.
             loadCost(btnNo);
+            checks[btnNo].addCounter();
+            checks[btnNo].checkTimesBought();
             checkPurchaseable();
         }
     }

@@ -16,7 +16,6 @@ public class Shooting : MonoBehaviour
     public float attackRange;
     public float coolDownAttack;
     private float attackDamage;
-    public float boomerangDamage;
 
     private float timerBoomerang; // boomerang variables
     private bool canBoomerang;

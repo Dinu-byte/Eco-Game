@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Health
   m_EditorClassIdentifier: 
   title: Health
-  description: Increases the max health and health recovery
+  description: Increases the max health and health recovery.
   baseCost: 25
