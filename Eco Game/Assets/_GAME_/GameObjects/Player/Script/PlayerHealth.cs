@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
             }
         }
 
-
+        
     }
     public void TakeDamage(GameObject enemy, float damage)
     {
@@ -112,7 +112,7 @@ public class PlayerHealth : MonoBehaviour
                 Die();  // Destroy the player when health reaches 0
             }
         }
-
+        
     }
 
     public float getHealth()
@@ -120,7 +120,7 @@ public class PlayerHealth : MonoBehaviour
         return currentHealth;
     }
 
-    private void heal()
+    private void heal ()
     {
         currentHealth += healValue;
         if (currentHealth > health)
@@ -145,7 +145,7 @@ public class PlayerHealth : MonoBehaviour
 
         gameOverCanvas.SetActive(true);
 
-        // gameObject.SetActive(false); // disable the player
+        gameObject.SetActive(false); // disable the player
 
     }
 
@@ -195,19 +195,19 @@ public class PlayerHealth : MonoBehaviour
         trashKills++;
     }
 
-    public void addCoins(int coinsDropped)
+    public void addCoins (int coinsDropped)
     {
         coins += coinsDropped;
         coinCount.text = "Coins: " + coins.ToString();
     }
 
-    public void addBoomerangDamage()
+    public void addBoomerangDamage ()
     {
         boomerangDamage += 5;
 
     }
 
-    public void addMaxHealth()
+    public void addMaxHealth ()
     {
         health += 25;
         currentHealth = health;
@@ -217,7 +217,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void decreaseCoolDown()
+    public void decreaseCoolDown ()
     {
         coolDownHeal -= 0.5f;
     }
@@ -227,7 +227,7 @@ public class PlayerHealth : MonoBehaviour
         boomerangSpeed += 0.75f;
     }
 
-    public void addImmunity()
+    public void addImmunity ()
     {
         immunityTime += 0.1f;
     }
