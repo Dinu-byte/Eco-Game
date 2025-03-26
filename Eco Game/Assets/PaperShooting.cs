@@ -21,7 +21,6 @@ public class PaperShooting : MonoBehaviour
 
     private Transform player;
     public GameObject bullet;
-    public Transform bulletPos;
 
     private Vector2 lastKnownPlayerPosition;
     private Vector3 originalScale;
@@ -121,6 +120,6 @@ public class PaperShooting : MonoBehaviour
 
     void shoot ()
     {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        Instantiate(bullet, transform.position, Quaternion.identity);
     }
 }
