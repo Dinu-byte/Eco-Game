@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91991d8184f4894aa37da11ed52c4f4, type: 3}
+  m_Name: Teacher-1
+  m_EditorClassIdentifier: 
+  dialogue:
+  - I'm so sorry it had to come like this, it's the adults' fault if the city is
+    being infested with living trash.
+  - We didn't think it would've become a problem for the future generations, but
+    here we are, it happened.
+  - I wish that this problem would end, but for this wish to come true, we must FIGHT!
+    We have to do our best to resolve the problem...
+  - But we'll also have to make sure it never happens again, so please always be
+    carefull and do the right thing, kid.

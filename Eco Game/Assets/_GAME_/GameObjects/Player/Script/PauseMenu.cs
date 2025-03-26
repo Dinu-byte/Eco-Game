@@ -6,6 +6,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject shopMenu;
 
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+        shopMenu.SetActive(false);
+    }
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -38,5 +44,11 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(0);
         Time.timeScale = 1.0f;
     }
+
+    public void fullScreen ()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
 
 }

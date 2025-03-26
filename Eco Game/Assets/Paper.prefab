@@ -185,7 +185,7 @@ MonoBehaviour:
   deceleration: 5
   shootCooldown: 1.5
   bullet: {fileID: 5732923047757339130, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
-  bulletPos: {fileID: 9116237212651740201, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
+  bulletPos: {fileID: 3493362089815416911}
 --- !u!114 &5840769335156005529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
   immunityTime: 0.4
   coinsDropped: 5
   rb: {fileID: 6356682285646306716}
-  strength: 70
+  strength: 60
   coolDown: 0.1
   OnBegin:
     m_PersistentCalls:

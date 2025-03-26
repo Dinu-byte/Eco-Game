@@ -196,7 +196,7 @@ MonoBehaviour:
   attackRadius: 1.5
   alertedRadius: 2.4
   fieldOfViewAngle: 120
-  maxSpeed: 2
+  maxSpeed: 3
   acceleration: 5
   deceleration: 5
 --- !u!114 &4339370117831059212
@@ -214,7 +214,7 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   health: 200
   immunityTime: 0.4
-  coinsDropped: 6
+  coinsDropped: 7
   rb: {fileID: 4470920354221248277}
   strength: 35
   coolDown: 0.1

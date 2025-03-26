@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91991d8184f4894aa37da11ed52c4f4, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Oh no! the trash all over the city has come to life, we have to do something
+    about it! Please, help the citizens defeat all the trash and make a better world
+    for all living beings!
+  - Anyways, I'm going to help you start off the journey.
+  - Move with WASD, perform a basic attack with LEFT CLICK, throw a ranged attack
+    with RIGHT CLICK, heal with SPACE (it has a cooldown) and interact with people
+    by pressing E.
+  - Oh, and don't forget the most important thing, if you press F you can access
+    the stats menu, where you can upgrade your statistics and become even stronger!
+  - Hope this helps, bye now!

@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e91991d8184f4894aa37da11ed52c4f4, type: 3}
-  m_Name: Yes
+  m_Name: Butcher-school
   m_EditorClassIdentifier: 
   dialogue:
-  - You said yes.
-  responses: []
+  - AAUUUGGHH! With all this trash around here the food is getting ruined!

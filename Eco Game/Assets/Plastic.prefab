@@ -196,7 +196,7 @@ MonoBehaviour:
   attackRadius: 2
   alertedRadius: 2.4
   fieldOfViewAngle: 90
-  maxSpeed: 3
+  maxSpeed: 4
   acceleration: 5
   deceleration: 5
 --- !u!114 &-3514247317042351404
