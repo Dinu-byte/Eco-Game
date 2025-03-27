@@ -55,7 +55,7 @@ public class EnemyHealth : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-
+                Die(player);
                 animator.SetTrigger("EnemyDie");
             }
         }
