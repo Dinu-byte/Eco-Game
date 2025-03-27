@@ -27,6 +27,9 @@ public class Shooting : MonoBehaviour
     public GameObject boomerang;
 
 
+
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,9 +49,9 @@ public class Shooting : MonoBehaviour
 
         Vector3 rotation = mousePos - transform.position; // sottraiamo la posizione dell'oggetto.
 
-        float rotZ = Mathf.Atan2(rotation.y,rotation.x) * Mathf.Rad2Deg; // gradi di rotazione nella z.
+        float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg; // gradi di rotazione nella z.
 
-        transform.rotation = Quaternion.Euler(0,0,rotZ);
+        transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
         if (!canAttack)
         {
@@ -58,7 +61,7 @@ public class Shooting : MonoBehaviour
                 canAttack = true;
                 timerAttack = 0;
             }
-            
+
         }
         if (Input.GetMouseButtonDown(0) && canAttack && !pauseMenu.activeSelf)
         {
@@ -90,8 +93,9 @@ public class Shooting : MonoBehaviour
         }
     }
 
-    void attack ()
+    void attack()
     {
+
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTransform.position, attackRange, enemyLayer);
 
         foreach (Collider2D enemy in hitEnemies)
@@ -106,13 +110,13 @@ public class Shooting : MonoBehaviour
         audioManager.playSFX(audioManager.SFX_ATTACK_high);
     }
 
-    void launchBoomerang ()
+    void launchBoomerang()
     {
         Instantiate(boomerang, player.transform.position, Quaternion.identity);
         audioManager.playSFX(audioManager.SFX_ATTACK_low);
     }
 
-    public void setBoomerangReturned (bool b)
+    public void setBoomerangReturned(bool b)
     {
         boomerangReturned = b;
     }
@@ -120,11 +124,11 @@ public class Shooting : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (attackTransform == null) return;
-        
+
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 
-    public void addDamage ()
+    public void addDamage()
     {
         attackDamage += 5;
     }

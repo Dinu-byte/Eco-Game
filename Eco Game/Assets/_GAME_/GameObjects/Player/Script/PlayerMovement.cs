@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 currentVelocity = Vector2.zero;
     private Rigidbody2D rb;
     private PlayerInput inputActions;
+    private Animator animator;
 
     [SerializeField] private DialogueUI dialogueUI;
     public DialogueUI DialogueUI => dialogueUI;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         inputActions = new PlayerInput();
+        animator = GetComponent<Animator>(); // Get Animator component
 
         // Bind movement input
         inputActions.Player.Move.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
@@ -40,29 +42,38 @@ public class PlayerMovement : MonoBehaviour
         if (dialogueUI.IsOpen)
         {
             rb.linearVelocity = Vector2.zero;
+            animator.SetBool("IsMoving", false);  // Stop animation when UI is open
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && Interactable != null)
         {
-            if (Interactable != null)
-            {
-                Interactable.Interact(this);
-            }
+            Interactable.Interact(this);
         }
-            // Target velocity based on input
-            Vector2 targetVelocity = movementInput * maxSpeed;
 
-            // Smoothly transition to the target velocity
-            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
+        // Target velocity based on input
+        Vector2 targetVelocity = movementInput * maxSpeed;
 
+        // Smoothly transition to the target velocity
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (movementInput.magnitude > 0 ? acceleration : deceleration) * Time.deltaTime);
+
+        // **Update Animator Parameters**
+        if (movementInput != Vector2.zero)
+        {
+            animator.SetFloat("MoveX", movementInput.x);
+            animator.SetFloat("MoveY", movementInput.y);
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
     }
 
-    public void addSpeed ()
+    public void addSpeed()
     {
         maxSpeed += 0.75f;
         acceleration += 0.2f;
         deceleration += 0.2f;
     }
-
 }

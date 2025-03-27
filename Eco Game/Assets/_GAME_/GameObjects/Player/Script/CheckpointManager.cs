@@ -13,10 +13,7 @@ public class CheckpointManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+
     }
 
     public void SetCheckpoint(Vector2 position)
