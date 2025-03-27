@@ -5,6 +5,9 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public GameObject pauseMenu;
+
+    public GameObject slash;
+
     private AudioManager audioManager;
 
     private Camera mainCam;
@@ -95,6 +98,7 @@ public class Shooting : MonoBehaviour
 
     void attack()
     {
+        Instantiate(slash, attackTransform.position, Quaternion.identity);
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackTransform.position, attackRange, enemyLayer);
 
