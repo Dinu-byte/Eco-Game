@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Strength
   m_EditorClassIdentifier: 
   title: Strength
-  description: Increases the damage of your base attack.
+  description: Increases the damage of your attacks.
   baseCost: 25

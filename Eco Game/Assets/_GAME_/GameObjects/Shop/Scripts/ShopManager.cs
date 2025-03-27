@@ -46,7 +46,7 @@ public class ShopManager : MonoBehaviour
     {
         for (int i = 0; i < itemsSO.Length; i++)
         {
-            costs[i] = itemsSO[i].baseCost;
+                costs[i] = itemsSO[i].baseCost;
         }
     }
 
