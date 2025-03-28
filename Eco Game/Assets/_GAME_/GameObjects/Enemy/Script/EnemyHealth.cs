@@ -7,13 +7,13 @@ using UnityEngine.Events;
 public class EnemyHealth : MonoBehaviour
 {
     public AudioManager audioManager;
-    private Animator animator;
 
     public float health;
     public float immunityTime;
     private float currentHealth;
     private bool canBeHit;
     private float timerHit;
+    public EnemyHitAnimate animate;
 
     public int coinsDropped;
 
@@ -25,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        animator = GetComponentInChildren<Animator>();
         timerHit = 0;
         canBeHit = true;
         currentHealth = health;
@@ -50,13 +49,18 @@ public class EnemyHealth : MonoBehaviour
             audioManager.playSFX(audioManager.SFX_MONSTER_HIT_normal);
 
 
-            // place here animation for enemy
-            animator.SetTrigger("EnemyHit");
+            if (animate != null)
+            {
+                animate.HitAnimation();
+            }
+            else
+            {
+                Debug.LogWarning("Animate is not assigned in " + gameObject.name);
+            }
 
             if (currentHealth <= 0)
             {
                 Die(player);
-                animator.SetTrigger("EnemyDie");
             }
         }
     }

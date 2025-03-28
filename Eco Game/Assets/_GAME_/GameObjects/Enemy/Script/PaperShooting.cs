@@ -21,6 +21,7 @@ public class PaperShooting : MonoBehaviour
 
     private Transform player;
     public GameObject bullet;
+    private Animator animator;
 
     private Vector2 lastKnownPlayerPosition;
     private Vector3 originalScale;
@@ -33,6 +34,7 @@ public class PaperShooting : MonoBehaviour
         originalScale = transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -78,6 +80,18 @@ public class PaperShooting : MonoBehaviour
         // Smooth acceleration & deceleration
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (directionToPlayer.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);
 
+        // Controlla se il nemico si sta effettivamente muovendo
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
+        Debug.Log("IsMoving: " + animator.GetBool("IsMoving"));
+
         // Adjust sprite direction
         if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
         {
@@ -89,8 +103,10 @@ public class PaperShooting : MonoBehaviour
         {
             currentState = State.Attacking;
             rb.linearVelocity = Vector2.zero;  // Stop moving when attacking
+            animator.SetBool("IsMoving", false); // Assicurati di fermare l'animazione del movimento
         }
     }
+
 
     void AttackPlayer()
     {
@@ -118,7 +134,7 @@ public class PaperShooting : MonoBehaviour
         return angle <= fieldOfViewAngle / 2f;
     }
 
-    void shoot ()
+    void shoot()
     {
         Instantiate(bullet, transform.position, Quaternion.identity);
     }

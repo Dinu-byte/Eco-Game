@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 8
   m_Sprite: {fileID: -8933899006741194884, guid: 3f970b13e0485b0489bb063403951a81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   audioManager: {fileID: 0}
   health: 200
   immunityTime: 0.4
+  animate: {fileID: 5003404633466984810}
   coinsDropped: 7
   rb: {fileID: 4470920354221248277}
   strength: 35
@@ -283,6 +284,7 @@ GameObject:
   - component: {fileID: 8323596868467041483}
   - component: {fileID: 1910648936057743993}
   - component: {fileID: 9044137229127706595}
+  - component: {fileID: 5003404633466984810}
   m_Layer: 9
   m_Name: Animator
   m_TagString: Untagged
@@ -299,7 +301,7 @@ Transform:
   m_GameObject: {fileID: 7647897965044456150}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.19, y: -0.53, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -370,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 7
   m_Sprite: {fileID: 1041867518613997539, guid: 23c0d1ffd1560904aaaa498ebb971744, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -382,3 +384,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5003404633466984810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647897965044456150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5794fa75d2c134cbcaa14f86a9c00d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
