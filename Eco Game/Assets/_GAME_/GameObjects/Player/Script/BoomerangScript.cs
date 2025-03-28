@@ -1,24 +1,23 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoomerangScript : MonoBehaviour
 {
-    public GameObject player; // the player
-    private Camera mainCam; // main camera
-    private Vector3 mousePos; // cursor cordinates
+    public GameObject player; // The player
+    private Camera mainCam; // Main camera
+    private Vector3 mousePos; // Cursor coordinates
     private Rigidbody2D rb;
-    private float timer; // timer to count when it should return to the player
-    private bool returning; // boolean for when it's returning
-    private float force; // the force (basically the speed) applied to the boomerang.
-    private float damage; // damage dealt to enemies.
-    public float timeBeforeReturn; // time before it returns to the player
-    public float distanceDestroyed; // developer things, too complicated to explain (it solves a problem so it is usefull, DO NOT DELETE).
+    private float timer; // Timer to count when it should return to the player
+    private bool returning; // Boolean for when it's returning
+    private float damage; // Damage dealt to enemies
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float speed = 1f; // Adjust this in Inspector to control speed
+    public float timeBeforeReturn; // Time before it returns to the player
+    public float distanceDestroyed; // Used to check when to destroy
+    private float force; // The force (speed) applied to the boomerang
+
     void Start()
     {
-        // SETTING ALL THE VARIABLES AND OBJECTS:
-
+        // Setting all variables and objects
         player = GameObject.FindGameObjectWithTag("Player");
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -29,10 +28,12 @@ public class BoomerangScript : MonoBehaviour
         force = player.GetComponent<PlayerHealth>().boomerangSpeed;
 
         Vector3 direction = mousePos - transform.position;
-        rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force;
+        rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force * speed;
+
+        GetComponent<Animator>().enabled = true;
+        GetComponent<Animator>().Play("BoomerangThrow");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (timer >= timeBeforeReturn)
@@ -43,10 +44,11 @@ public class BoomerangScript : MonoBehaviour
         {
             timer += Time.deltaTime;
         }
+
         if (returning)
         {
             moveTowardsPlayer();
-            if (Mathf.Abs(player.transform.position.x - transform.position.x) < distanceDestroyed && player.transform.position.y - transform.position.y < distanceDestroyed)
+            if (Vector2.Distance(transform.position, player.transform.position) < distanceDestroyed)
             {
                 destroyAndSetTrue();
             }
@@ -55,17 +57,15 @@ public class BoomerangScript : MonoBehaviour
 
     void moveTowardsPlayer()
     {
-        rb.linearVelocity = new Vector2(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y).normalized * force;
+        rb.linearVelocity = (player.transform.position - transform.position).normalized * force * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-
             other.gameObject.GetComponent<EnemyHealth>().takeDamage(player, damage);
             returning = true;
-
         }
         else if (other.gameObject.CompareTag("HitBox"))
         {
@@ -77,11 +77,9 @@ public class BoomerangScript : MonoBehaviour
         }
     }
 
-    private void destroyAndSetTrue ()
+    private void destroyAndSetTrue()
     {
         GameObject.FindGameObjectWithTag("RotatePoint").GetComponent<Shooting>().setBoomerangReturned(true);
         Destroy(gameObject);
     }
-
-
 }

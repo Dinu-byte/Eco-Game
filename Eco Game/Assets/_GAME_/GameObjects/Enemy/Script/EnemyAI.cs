@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float deceleration = 5f;  // Deceleration speed
 
     private Transform player;
+    private Animator animator;
 
     private Vector2 lastKnownPlayerPosition;
     private Vector3 originalScale;
@@ -26,6 +27,7 @@ public class EnemyAI : MonoBehaviour
         originalScale = transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -70,6 +72,8 @@ public class EnemyAI : MonoBehaviour
     {
         Vector2 directionToPlayer = (player.position - transform.position).normalized;
         Vector2 targetVelocity = directionToPlayer * maxSpeed;
+
+        animator.SetBool("IsMoving", true);
 
         // Smooth acceleration & deceleration
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, targetVelocity, (directionToPlayer.magnitude > 0 ? acceleration : deceleration) * Time.fixedDeltaTime);

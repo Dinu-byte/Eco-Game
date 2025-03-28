@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2267427930318533286}
   - component: {fileID: 4774736329142899879}
+  - component: {fileID: 4915131825268564570}
   - component: {fileID: 7624121675058771865}
   - component: {fileID: 4470920354221248277}
   - component: {fileID: 6317697805348653821}
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -26.34471, y: 30.40805, z: 0.058121115}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8323596868467041483}
@@ -81,18 +82,40 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
-  m_Sprite: {fileID: 2040909001409688495, guid: 9707200a06490e548a784170f7385dfc, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: -8933899006741194884, guid: 3f970b13e0485b0489bb063403951a81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.4, y: 7.2}
+  m_Size: {x: 3.47, y: 4.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4915131825268564570
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323811248435189166}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0cce449d26453db4fb9decdc9188abc3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &7624121675058771865
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,17 +150,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.4, y: 7.2}
-    newSize: {x: 5.4, y: 7.2}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 3.47, y: 4.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.4, y: 7.2}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!50 &4470920354221248277
 Rigidbody2D:
