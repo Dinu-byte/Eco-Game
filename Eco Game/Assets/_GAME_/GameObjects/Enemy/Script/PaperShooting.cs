@@ -8,6 +8,9 @@ public class PaperShooting : MonoBehaviour
     private enum State { Idle, Alerted, Attacking }
     private State currentState;
 
+    private EnemyHealth enemyHealth;
+
+
     [SerializeField] private float sightRadius = 10f;
     [SerializeField] private float attackRadius = 2f;
     [SerializeField] private float alertedRadius = 2.4f;
@@ -32,6 +35,7 @@ public class PaperShooting : MonoBehaviour
     {
         currentState = State.Idle;
         originalScale = transform.localScale;
+        enemyHealth = gameObject.GetComponent<EnemyHealth>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
         animator = GetComponent<Animator>();
@@ -65,7 +69,7 @@ public class PaperShooting : MonoBehaviour
         Vector2 directionToPlayer = player.position - transform.position;
         float distanceToPlayer = directionToPlayer.magnitude;
 
-        if ((distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer)) || distanceToPlayer <= alertedRadius)
+        if ((distanceToPlayer <= sightRadius && IsPlayerInSight(directionToPlayer)) || distanceToPlayer <= alertedRadius || enemyHealth.getCurrentHealth() < enemyHealth.health)
         {
             lastKnownPlayerPosition = player.position;
             currentState = State.Alerted;

@@ -115,4 +115,10 @@ public class EnemyHealth : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         OnDone?.Invoke();
     }
+
+    public float getCurrentHealth ()
+    {
+
+        return currentHealth;
+    }
 }

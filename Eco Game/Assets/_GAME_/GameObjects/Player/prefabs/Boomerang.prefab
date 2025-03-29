@@ -49,8 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  speed: 1
   timeBeforeReturn: 0.5
-  distanceDestroyed: 0.005
+  timeBeforeDestroyed: 2.6
+  distanceDestroyed: 0.01
 --- !u!50 &-7877399061729848575
 Rigidbody2D:
   serializedVersion: 5

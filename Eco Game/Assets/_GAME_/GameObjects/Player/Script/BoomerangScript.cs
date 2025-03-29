@@ -7,11 +7,13 @@ public class BoomerangScript : MonoBehaviour
     private Vector3 mousePos; // Cursor coordinates
     private Rigidbody2D rb;
     private float timer; // Timer to count when it should return to the player
+    private float timeAlive;
     private bool returning; // Boolean for when it's returning
     private float damage; // Damage dealt to enemies
 
     public float speed = 1f; // Adjust this in Inspector to control speed
     public float timeBeforeReturn; // Time before it returns to the player
+    public float timeBeforeDestroyed = 2.6f;
     public float distanceDestroyed; // Used to check when to destroy
     private float force; // The force (speed) applied to the boomerang
 
@@ -24,6 +26,7 @@ public class BoomerangScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         returning = false;
         timer = 0;
+        timeAlive = 0;
         damage = player.GetComponent<PlayerHealth>().boomerangDamage;
         force = player.GetComponent<PlayerHealth>().boomerangSpeed;
 
@@ -48,7 +51,8 @@ public class BoomerangScript : MonoBehaviour
         if (returning)
         {
             moveTowardsPlayer();
-            if (Vector2.Distance(transform.position, player.transform.position) < distanceDestroyed)
+            timeAlive += Time.deltaTime;
+            if (Vector2.Distance(transform.position, player.transform.position) <= distanceDestroyed || timeAlive >= timeBeforeDestroyed)
             {
                 destroyAndSetTrue();
             }
@@ -80,6 +84,7 @@ public class BoomerangScript : MonoBehaviour
     private void destroyAndSetTrue()
     {
         GameObject.FindGameObjectWithTag("RotatePoint").GetComponent<Shooting>().setBoomerangReturned(true);
+        timeAlive = 0;
         Destroy(gameObject);
     }
 }

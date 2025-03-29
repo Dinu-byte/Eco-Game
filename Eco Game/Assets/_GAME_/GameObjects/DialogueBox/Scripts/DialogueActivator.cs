@@ -3,6 +3,8 @@ using UnityEngine;
 public class DialogueActivator : MonoBehaviour, IInteractable
 {
     [SerializeField] private DialogueObject dialogueObject;
+    private GameObject InteractCanvas;
+    private bool isActive;
 
     public void Interact (PlayerMovement player)
     {
