@@ -7519,7 +7519,7 @@ TextureImporter:
       name: 17_Garden_16x16_287
       rect:
         serializedVersion: 2
-        x: 496
+        x: 495
         y: 2991
         width: 16
         height: 16
@@ -8157,8 +8157,8 @@ TextureImporter:
       name: 17_Garden_16x16_316
       rect:
         serializedVersion: 2
-        x: 448
-        y: 2975
+        x: 449
+        y: 2976
         width: 16
         height: 16
       alignment: 0
@@ -8180,7 +8180,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 464
-        y: 2975
+        y: 2976
         width: 16
         height: 16
       alignment: 0
@@ -8202,7 +8202,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 2975
+        y: 2976
         width: 16
         height: 16
       alignment: 0
@@ -8861,7 +8861,7 @@ TextureImporter:
       name: 17_Garden_16x16_348
       rect:
         serializedVersion: 2
-        x: 448
+        x: 449
         y: 2959
         width: 16
         height: 16
@@ -9588,7 +9588,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 464
-        y: 2943
+        y: 2944
         width: 16
         height: 16
       alignment: 0
@@ -9610,7 +9610,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 2943
+        y: 2944
         width: 16
         height: 16
       alignment: 0
@@ -9632,7 +9632,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 496
-        y: 2943
+        y: 2944
         width: 16
         height: 16
       alignment: 0

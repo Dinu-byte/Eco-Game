@@ -5,6 +5,10 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject shopMenu;
+    [SerializeField] GameObject gameOverCanvas;
+    public PlayerRespawn respawn;
+
+    public GameObject player;
 
     private void Start()
     {
@@ -36,7 +40,9 @@ public class PauseMenu : MonoBehaviour
 
     public void restart()
     {
-        SceneManager.LoadScene(1);
+        respawn.Respawn();
+        gameOverCanvas.SetActive(false);
+        player.SetActive(true);
     }
 
     public void home()

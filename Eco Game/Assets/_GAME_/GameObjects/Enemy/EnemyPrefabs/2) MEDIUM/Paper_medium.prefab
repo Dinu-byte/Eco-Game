@@ -309,7 +309,7 @@ MonoBehaviour:
   acceleration: 5
   deceleration: 5
   shootCooldown: 1.5
-  bullet: {fileID: 3082797714006568516, guid: 5d2748d3ae45a8742b9a3e2d1b19d2ae, type: 3}
+  bullet: {fileID: 1270622598348351202, guid: daf7f0bfd4ef73a418530e24db5c7560, type: 3}
 --- !u!114 &3331156549865998242
 MonoBehaviour:
   m_ObjectHideFlags: 0

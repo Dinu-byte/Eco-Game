@@ -2557,10 +2557,10 @@ TextureImporter:
       name: GUI_99
       rect:
         serializedVersion: 2
-        x: 175
-        y: 171
-        width: 17
-        height: 5
+        x: 177
+        y: 173
+        width: 14
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2601,10 +2601,10 @@ TextureImporter:
       name: GUI_101
       rect:
         serializedVersion: 2
-        x: 175
-        y: 163
-        width: 17
-        height: 5
+        x: 176
+        y: 164
+        width: 16
+        height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2623,10 +2623,10 @@ TextureImporter:
       name: GUI_102
       rect:
         serializedVersion: 2
-        x: 175
-        y: 160
-        width: 17
-        height: 3
+        x: 177
+        y: 161
+        width: 14
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

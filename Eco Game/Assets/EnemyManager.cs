@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
+    public EnemyRemainingBarScript enemyRemainingBarScript;
+
     private int totalEnemies;
     private int enemiesKilled;
 
@@ -12,6 +14,7 @@ public class EnemyManager : MonoBehaviour
         totalEnemies = 0;
         enemiesKilled = 0;
         totalEnemies = enemyCount();
+        enemyRemainingBarScript.setMaxEnemyCount(totalEnemies);
         Debug.Log(totalEnemies);
     }
 
@@ -23,22 +26,24 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void addEnemiesKilled ()
+    public void addEnemiesKilled()
     {
         enemiesKilled++;
+        enemyRemainingBarScript.setEnemyCount(totalEnemies - enemiesKilled);
+        checkEnemiesKilled();
     }
 
-    public void addTotalEnemies ()
+    public void addTotalEnemies()
     {
         totalEnemies++;
     }
 
-    public int enemyCount ()
+    public int enemyCount()
     {
         return GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 
-    public int getTotalEnemies ()
+    public int getTotalEnemies()
     {
         return totalEnemies;
     }

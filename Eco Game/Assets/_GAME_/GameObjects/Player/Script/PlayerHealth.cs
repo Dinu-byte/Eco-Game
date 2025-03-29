@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
 
     private AudioManager audioManager;
 
+    public PlayerHitAnimate animate;
+
     [SerializeField] public float health;  // Default health for each trash piece
 
     private int totalKills; // statistics
@@ -107,6 +109,15 @@ public class PlayerHealth : MonoBehaviour
 
             canBeHit = false;
 
+            if (animate != null)
+            {
+                animate.HitAnimation();
+            }
+            else
+            {
+                Debug.LogWarning("Animate is not assigned in " + gameObject.name);
+            }
+
             if (currentHealth <= 0)
             {
                 Die();  // Destroy the player when health reaches 0
@@ -118,6 +129,12 @@ public class PlayerHealth : MonoBehaviour
     public float getHealth()
     {
         return currentHealth;
+    }
+
+    public void setToMaxHealth()
+    {
+        currentHealth = health;
+        healthBarScript.setHealth(currentHealth);
     }
 
     private void heal()
@@ -138,7 +155,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Player died!");
 
-        // place here animation
+        GetComponent<PlayerMovement>().enabled = false;
 
         // load game over screen and music/sound effects.
         audioManager.playSFX(audioManager.SFX_UI_gameOver);
@@ -198,7 +215,7 @@ public class PlayerHealth : MonoBehaviour
     public void addCoins(int coinsDropped)
     {
         coins += coinsDropped;
-        coinCount.text = "Coins: " + coins.ToString();
+        coinCount.text = coins.ToString();
     }
 
     public void addBoomerangDamage()

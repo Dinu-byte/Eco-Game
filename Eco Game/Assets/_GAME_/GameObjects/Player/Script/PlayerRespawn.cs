@@ -20,5 +20,9 @@ public class PlayerRespawn : MonoBehaviour
         {
             transform.position = initialPosition;
         }
+
+        GetComponent<PlayerHealth>().setToMaxHealth();
+
+        GetComponent<PlayerMovement>().enabled = true;
     }
 }
