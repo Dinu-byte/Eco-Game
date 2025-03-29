@@ -30,6 +30,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();  // Get Rigidbody2D component
         animator = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     private void Update()
