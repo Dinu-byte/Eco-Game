@@ -11,6 +11,8 @@ TagManager:
   - RotatePoint
   - Audio
   - EnemyCounter
+  - InteractCanvas
+  - npc
   layers:
   - Default
   - TransparentFX
