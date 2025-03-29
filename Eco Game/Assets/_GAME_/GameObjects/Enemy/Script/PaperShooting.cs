@@ -90,7 +90,7 @@ public class PaperShooting : MonoBehaviour
             animator.SetBool("IsMoving", false);
         }
 
-        Debug.Log("IsMoving: " + animator.GetBool("IsMoving"));
+
 
         // Adjust sprite direction
         if (Mathf.Abs(directionToPlayer.x) > Mathf.Abs(directionToPlayer.y))
