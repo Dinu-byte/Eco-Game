@@ -1,4 +1,4 @@
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour
@@ -19,7 +19,7 @@ public class EnemyBulletScript : MonoBehaviour
         Vector3 direction = player.transform.position - transform.position;
         rb.linearVelocity = new Vector2(direction.x, direction.y).normalized * force;
 
-        float rot = Mathf.Atan2(-direction.y,-direction.x) * Mathf.Rad2Deg;
+        float rot = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot);
     }
 
@@ -32,11 +32,12 @@ public class EnemyBulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player"))
+        {
 
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(gameObject, damage);
             Destroy(gameObject);
-            
+
         }
         else if (other.gameObject.CompareTag("HitBox"))
         {
