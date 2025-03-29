@@ -10,7 +10,7 @@ public class ItemCounter
     {
         counter = 0;
         canBeBought = true;
-        maxTimesBought = 5;
+        maxTimesBought = 8;
     }
 
     public void addCounter ()

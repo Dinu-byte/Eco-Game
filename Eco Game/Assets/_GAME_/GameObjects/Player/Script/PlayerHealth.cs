@@ -220,7 +220,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void addBoomerangDamage()
     {
-        boomerangDamage += 5;
+        boomerangDamage += 4;
 
     }
 
@@ -241,11 +241,11 @@ public class PlayerHealth : MonoBehaviour
 
     public void addBoomerangSpeed()
     {
-        boomerangSpeed += 0.75f;
+        boomerangSpeed += 0.6f;
     }
 
     public void addImmunity()
     {
-        immunityTime += 0.1f;
+        immunityTime += 0.08f;
     }
 }

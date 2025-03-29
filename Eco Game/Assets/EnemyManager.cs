@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     public void checkEnemiesKilled()
     {
-        if (enemiesKilled >= totalEnemies)
+        if (enemiesKilled/100*90 >= totalEnemies)
         {
             SceneManager.LoadScene(2);
         }

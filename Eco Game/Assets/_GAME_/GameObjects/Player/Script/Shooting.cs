@@ -134,13 +134,13 @@ public class Shooting : MonoBehaviour
 
     public void addDamage()
     {
-        attackDamage += 5;
+        attackDamage += 6;
     }
 
     public void decreaseCoolDown()
     {
-        coolDownAttack -= 0.1f;
-        coolDownBoomerang -= 0.05f;
+        coolDownAttack -= 0.075f;
+        coolDownBoomerang -= 0.025f;
 
     }
 
