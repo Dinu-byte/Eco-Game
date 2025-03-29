@@ -32,7 +32,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        if (Time.frameCount % 10 == 0)
+        if (Time.frameCount % 16 == 0)
         {
             switch (currentState)
             {

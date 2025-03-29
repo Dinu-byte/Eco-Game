@@ -186,7 +186,7 @@ MonoBehaviour:
   acceleration: 5
   deceleration: 5
   shootCooldown: 1.5
-  bullet: {fileID: 5732923047757339130, guid: 58577b10f621330449d756fd2c14c8c9, type: 3}
+  bullet: {fileID: 1270622598348351202, guid: a9021ca88937caa4c95e13fe8fdb8c16, type: 3}
 --- !u!114 &5840769335156005529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,7 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa38cff9f721a7c4da6fd822f2c8d49f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioManager: {fileID: 0}
   health: 80
   immunityTime: 0.4
   animate: {fileID: 3982999869270207010}

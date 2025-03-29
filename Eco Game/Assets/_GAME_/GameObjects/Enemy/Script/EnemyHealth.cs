@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public AudioManager audioManager;
+    private AudioManager audioManager;
+    private EnemyManager enemyManager;
 
     public float health;
     public float immunityTime;
@@ -25,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        enemyManager = GameObject.FindGameObjectWithTag("EnemyCounter").GetComponent<EnemyManager>();
         timerHit = 0;
         canBeHit = true;
         currentHealth = health;
@@ -89,6 +91,8 @@ public class EnemyHealth : MonoBehaviour
 
         player.GetComponent<PlayerHealth>().addTotalKills();
         player.GetComponent<PlayerHealth>().addCoins(coinsDropped);
+        enemyManager.addEnemiesKilled();
+        enemyManager.checkEnemiesKilled();
 
         Destroy(gameObject); // destroy the enemy
 
